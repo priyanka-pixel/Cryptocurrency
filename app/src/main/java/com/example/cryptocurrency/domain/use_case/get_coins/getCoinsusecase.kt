@@ -15,13 +15,13 @@ class getCoinsusecase @Inject constructor(
 ) {
     operator fun invoke(): Flow<Resource<List<Coin>>> = flow {
         try {
-            emit(Resource.Loading<List<Coin>>())
+            emit(Resource.Loading())
             val coins = repository.getCoins().map { it.toCoin() }
-            emit(Resource.Success<List<Coin>>(coins))
+            emit(Resource.Success(coins))
         } catch (e: HttpException) {
-            emit(Resource.Error<List<Coin>>(e.localizedMessage ?: "An unexpected error occur"))
+            emit(Resource.Error(e.localizedMessage ?: "An unexpected error occur"))
         } catch (e: IOException) {
-            emit(Resource.Error<List<Coin>>("Couldn't reach server"))
+            emit(Resource.Error("Couldn't reach server"))
         }
 
     }

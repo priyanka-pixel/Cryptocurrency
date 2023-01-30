@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cryptocurrency.data.remote.CoinPaprikaApi
 import com.example.cryptocurrency.domain.use_case.get_coin.getCoinUsecase
-import com.example.cryptocurrency.domain.use_case.get_coins.getCoinsusecase
 import com.tes.android.projects.tvshowsapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn

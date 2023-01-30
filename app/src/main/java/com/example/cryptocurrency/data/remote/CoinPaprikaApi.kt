@@ -13,10 +13,10 @@ interface CoinPaprikaApi {
     suspend fun getCoinById(@Path("id") id: String): CoinDetailDto
 
 
-  companion object {
-      const val BASE_URL = "https://api.coinpaprika.com/"
+    companion object {
+        const val BASE_URL = "https://api.coinpaprika.com/"
 
-      const val COIN_ID = "id"
+        const val COIN_ID = "id"
 
-}
+    }
 }
