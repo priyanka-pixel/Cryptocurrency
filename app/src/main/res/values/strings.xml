@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Cryptocurrency</string>
+    <string name="coinList_screen">CoinListScreen</string>
+    <string name="coinDetail_screen">CoinDetailScreen</string>
+</resources>
