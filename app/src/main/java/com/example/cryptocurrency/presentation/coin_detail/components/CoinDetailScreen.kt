@@ -1,8 +1,8 @@
 package com.example.cryptocurrency.presentation.coin_detail.components
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
@@ -15,16 +15,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role.Companion.Image
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -32,8 +27,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.cryptocurrency.R
-import com.example.cryptocurrency.domain.module.CoinDetail
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CoinDetailScreen(navController: NavController) {
     val context = LocalContext.current
@@ -81,14 +76,11 @@ fun CoinDetailScreen(navController: NavController) {
                 }
             )
         },
-
         content = {
             Detail(navController)
         }
     )
 }
-
-
 @Composable
 fun Detail(
     navController: NavController,

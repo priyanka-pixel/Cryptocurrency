@@ -25,8 +25,7 @@ data class CoinDetailDto(
     val symbol: String = "",
     val tags: List<Tag> = listOf(),
     val team: List<TeamMember> = listOf(),
-    val type: String = "",
-    val whitepaper: Whitepaper = Whitepaper()
+    val type: String = ""
 )
 
 fun CoinDetailDto.toCoinDetail(): CoinDetail {

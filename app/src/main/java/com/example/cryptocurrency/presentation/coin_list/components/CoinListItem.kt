@@ -72,7 +72,7 @@ fun CoinListItem(
 //                }
 
             }
-            Column() {
+            Column {
                 Text(
                     text = if (coin.is_active) "Active" else "Inactive",
                     color = if (coin.is_active) Color.Green else Color.Red,

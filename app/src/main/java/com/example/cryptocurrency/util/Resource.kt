@@ -1,4 +1,4 @@
-package com.tes.android.projects.tvshowsapp.util
+package com.example.cryptocurrency.util
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T?): Resource<T>(data)
