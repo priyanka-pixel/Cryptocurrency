@@ -6,6 +6,20 @@ plugins {
 }
 
 android {
+
+    flavorDimensions "app_type"
+    productFlavors {
+        demo {
+            dimension "app_type"
+            manifestPlaceholders = [Cryptocurrency: "Cryptocurrency - Demo"]
+            applicationIdSuffix ".demo"
+        }
+        full {
+            dimension "app_type"
+            manifestPlaceholders = [Cryptocurrency: "Cryptocurrency - Full"]
+            applicationIdSuffix ".full"
+        }
+    }
     namespace 'com.example.cryptocurrency'
     compileSdk 33
 
