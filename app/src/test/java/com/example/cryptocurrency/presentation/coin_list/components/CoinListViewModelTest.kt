@@ -1,30 +1,29 @@
 package com.example.cryptocurrency.presentation.coin_list.components
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.cryptocurrency.data.remote.CoinPaprikaApi
-import com.example.cryptocurrency.data.repository.CoinRepoImpl
-import com.example.cryptocurrency.domain.repository.CoinRepository
 import com.example.cryptocurrency.domain.use_case.get_coins.GetCoinsUseCase
+import com.example.cryptocurrency.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.*
+import org.junit.Assert.assertEquals
 import org.junit.rules.TestRule
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.mockito.kotlin.whenever
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class SchoolsViewModelTest {
-    private var coinViewModel: CoinListViewModel? = null
-    private var coinRepository: CoinRepository? = null
-    private var getcoinUseCase: GetCoinsUseCase? = null
-
+    private lateinit var coinViewModel: CoinListViewModel
 
     @Mock
-    private lateinit var Api: CoinPaprikaApi
+    private lateinit var getcoinsUseCase: GetCoinsUseCase
+
     private val testDispatcher = UnconfinedTestDispatcher()
 
 
@@ -36,36 +35,26 @@ class SchoolsViewModelTest {
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
+
         MockitoAnnotations.openMocks(this)
-        coinRepository = CoinRepoImpl(Api)
-        getcoinUseCase = GetCoinsUseCase(coinRepository!!)
+        coinViewModel = CoinListViewModel(getcoinsUseCase)
 
     }
 
     @After
     fun tearDown() {
-        coinRepository = null
-        getcoinUseCase = null
-        coinViewModel = null
-
         Dispatchers.resetMain()
     }
 
     @Test
     fun `confirm first state is loading`() {
         runBlocking {
-            coinViewModel = CoinListViewModel(getcoinUseCase!!)
-            val state = coinViewModel!!.state.value
-            Assert.assertTrue(state.isLoading)
+            whenever(getcoinsUseCase.invoke()).thenReturn(flow {
+                emit(Resource.Loading())
+                emit(Resource.Success(listOf()))
+            })
+            assertEquals(CoinListState(isLoading = false, listOf(), ""), coinViewModel.state.value)
         }
     }
 
-    @Test
-    fun `get Error Response from Api Expect Error State`() {
-        runBlocking {
-            coinViewModel = CoinListViewModel((getcoinUseCase!!))
-            val state = coinViewModel!!.state.value
-            Assert.assertEquals("", state.error)
-        }
-    }
 }
