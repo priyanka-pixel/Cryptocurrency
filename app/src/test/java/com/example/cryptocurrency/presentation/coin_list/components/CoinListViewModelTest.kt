@@ -65,7 +65,7 @@ class SchoolsViewModelTest {
         runBlocking {
             coinViewModel = CoinListViewModel((getcoinUseCase!!))
             val state = coinViewModel!!.state.value
-            Assert.assertNotEquals(state.error, null)
+            Assert.assertEquals("", state.error)
         }
     }
 }
